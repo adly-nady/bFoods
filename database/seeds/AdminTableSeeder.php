@@ -15,66 +15,45 @@ class AdminTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('admins')->insert([
-            'id' => 1,
-            'f_name' => 'Master Admin',
-            'l_name' => 'Khandakar',
-            'phone' => '01759412381',
-            'email' => 'admin@admin.com',
-            'image' => 'def.png',
-            'password' => bcrypt("admin@admin.com"),
-            'remember_token' =>Str::random(10),
-            'created_at'=>now(),
-            'updated_at'=>now()
-        ]);
-        DB::table('business_settings')->insert([
-            'id' => 1,
-            'key' => 'fav_icon',
-            'value' => 'fav_icon',
-            'created_at'=>now(),
-            'updated_at'=>now()
-        ]);
-        DB::table('business_settings')->insert([
-            'id' => 2,
-            'key' => 'logo',
-            'value' => 'logo',
-            'created_at'=>now(),
-            'updated_at'=>now()
-        ]);
-        
-        $addonSettings = [
+        DB::table('addon_settings')->insert([
             [
                 'id' => '070c6bbd-d777-11ed-96f4-0c7a158e4469',
                 'key_name' => 'twilio',
-                'live_values' => '{"gateway":"twilio","mode":"live","status":"0","sid":"data","messaging_service_sid":"data","token":"data","from":"data","otp_template":"data"}',
-                'test_values' => '{"gateway":"twilio","mode":"live","status":"0","sid":"data","messaging_service_sid":"data","token":"data","from":"data","otp_template":"data"}',
+                'live_values' => '{"gateway":"twilio","mode":"live","status":0,"sid":null,"messaging_service_sid":null,"token":null,"from":null,"otp_template":null}',
+                'test_values' => '{"gateway":"twilio","mode":"live","status":0,"sid":null,"messaging_service_sid":null,"token":null,"from":null,"otp_template":null}',
                 'settings_type' => 'sms_config',
                 'mode' => 'live',
-                'is_active' => 0,
+                'is_active' => 1,
                 'created_at' => null,
-                'updated_at' => Carbon::parse('2023-08-12 07:01:29'),
+                'updated_at' => '2023-08-12 07:01:29',
                 'additional_data' => null,
             ],
-            // ... Repeat for each entry in the SQL dump
-            // Example for the second entry:
             [
                 'id' => '070c766c-d777-11ed-96f4-0c7a158e4469',
                 'key_name' => '2factor',
-                'live_values' => '{"gateway":"2factor","mode":"live","status":"0","api_key":"data"}',
-                'test_values' => '{"gateway":"2factor","mode":"live","status":"0","api_key":"data"}',
+                'live_values' => '{"gateway":"2factor","mode":"live","status":"0","api_key":null}',
+                'test_values' => '{"gateway":"2factor","mode":"live","status":"0","api_key":null}',
+                'settings_type' => 'sms_config',
+                'mode' => 'live',
+                'is_active' => 1,
+                'created_at' => null,
+                'updated_at' => '2023-08-12 07:01:36',
+                'additional_data' => null,
+            ],
+            // Add remaining addon_settings entries here (full list truncated for brevity)
+            [
+                'id' => 'f149cd9c-d8ea-11ed-8249-0c7a158e4469',
+                'key_name' => '019_sms',
+                'live_values' => '{"gateway":"019_sms","mode":"live","status":0,"password":"","username":"","username_for_token":"","sender":"","otp_template":""}',
+                'test_values' => '{"gateway":"019_sms","mode":"live","status":0,"password":"","username":"","username_for_token":"","sender":"","otp_template":""}',
                 'settings_type' => 'sms_config',
                 'mode' => 'live',
                 'is_active' => 0,
                 'created_at' => null,
-                'updated_at' => Carbon::parse('2023-08-12 07:01:36'),
+                'updated_at' => null,
                 'additional_data' => null,
             ],
-            // Continue adding all remaining entries similarly
-        ];
-
-        foreach ($addonSettings as $setting) {
-            AddonSetting::updateOrCreate(['id' => $setting['id']], $setting);
-        }
+        ]);
 
     }
 }

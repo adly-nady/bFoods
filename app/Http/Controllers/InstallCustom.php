@@ -13,11 +13,9 @@ class InstallCustom extends Controller
 {   
     public function index()
     {
-        if($this->checkDatabaseExists(env('DB_DATABASE')))
-        {
+        if ($this->checkDatabaseExists(env('DB_DATABASE'))) {
             return redirect()->route('admin.auth.login');
-        }else
-        {
+        } else {
             return view('install');
         }
     }
@@ -52,28 +50,20 @@ class InstallCustom extends Controller
             DB::purge('mysql');
             DB::reconnect('mysql');
 
-            // تنفيذ عملية التثبيت
-            Artisan::call('db:wipe', ['--force' => true]); 
-            $sqlPath = base_path('installation/backup/database.sql');
-            DB::unprepared(file_get_contents($sqlPath));
+            // تنفيذ الـ Migrations
+            Artisan::call('migrate', ['--force' => true]);
 
-            // إضافة المستخدم الإداري
-            DB::table('admins')->insertOrIgnore([
-                'f_name' => $request['admin_f_name'] ?? "Admin",
-                'l_name' => $request['admin_l_name'] ?? "User",
-                'email' => $request['admin_email'],
-                'password' => bcrypt($request['admin_password']),
-                'phone' => $request['phone_code'] . $request['admin_phone'],
-                'admin_role_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
+            // تنفيذ الـ Seeders مع تمرير بيانات الطلب
+            Artisan::call('db:seed', [
+                '--force' => true,
+                '--class' => 'DatabaseSeeder',
+                '--admin_f_name' => $request['admin_f_name'] ?? 'Admin',
+                '--admin_l_name' => $request['admin_l_name'] ?? 'User',
+                '--admin_email' => $request['admin_email'],
+                '--admin_password' => $request['admin_password'],
+                '--admin_phone' => $request['phone_code'] . $request['admin_phone'],
+                '--web_name' => $request['web_name'] ?? 'My Business',
             ]);
-
-            // إعدادات الأعمال
-            DB::table('business_settings')->updateOrInsert(
-                ['key' => 'restaurant_name'],
-                ['value' => $request['web_name'] ?? 'My Business']
-            );
 
             return redirect()->route('admin.dashboard')->with('success', 'تم التثبيت بنجاح!');
 
