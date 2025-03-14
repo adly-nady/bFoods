@@ -8,7 +8,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run($admin_f_name = 'Admin', $admin_l_name = 'User', $admin_email = null, $admin_password = null, $admin_phone = null, $web_name = 'My Business')
     {
-
         $this->callWith(AdminSeeder::class, [
             'admin_f_name' => $admin_f_name,
             'admin_l_name' => $admin_l_name,
@@ -22,18 +21,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            UsersSeeder::class,             // Add this first
+            UsersSeeder::class,
             AddonSettingsSeeder::class,
             AdminRolesSeeder::class,
-            // AdminSeeder::class,
             BannersSeeder::class,
             BranchesSeeder::class,
-            BusinessSettingsSeeder::class,
             CategoriesSeeder::class,
             ProductsSeeder::class,
             ProductByBranchesSeeder::class,
             ConversationsSeeder::class,
+            // OrdersSeeder::class,
+            // OfflinePaymentsSeeder::class,
         ]);
-
     }
 }
