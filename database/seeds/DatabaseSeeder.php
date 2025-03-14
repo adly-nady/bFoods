@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->callWith(BusinessSettingsSeeder::class, [
             'web_name' => $web_name,
         ]);
-        
+
         $this->call([
             AddonSettingsSeeder::class,
             AdminRolesSeeder::class,
@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             BranchesSeeder::class,
             CategoriesSeeder::class,
             ProductsSeeder::class,
+            ConversationsSeeder::class,
             ProductByBranchesSeeder::class,
         ]);
 
