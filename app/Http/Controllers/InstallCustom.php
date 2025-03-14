@@ -59,7 +59,7 @@ class InstallCustom extends Controller
                 '--class' => 'DatabaseSeeder',
                 '--admin_f_name' => $request['admin_f_name'] ?? 'Admin',
                 '--admin_l_name' => $request['admin_l_name'] ?? 'User',
-                '--admin_email' => $request['admin_email'],
+                '--admin_email' => $request['admin_email'] ?? "admin@admin.com",
                 '--admin_password' => $request['admin_password'],
                 '--admin_phone' => $request['phone_code'] . $request['admin_phone'],
                 '--web_name' => $request['web_name'] ?? 'My Business',

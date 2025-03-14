@@ -22,14 +22,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            UsersSeeder::class,             // Add this first
             AddonSettingsSeeder::class,
             AdminRolesSeeder::class,
+            // AdminSeeder::class,
             BannersSeeder::class,
             BranchesSeeder::class,
+            BusinessSettingsSeeder::class,
             CategoriesSeeder::class,
             ProductsSeeder::class,
-            ConversationsSeeder::class,
             ProductByBranchesSeeder::class,
+            ConversationsSeeder::class,
         ]);
 
     }
