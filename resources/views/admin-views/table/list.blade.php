@@ -95,7 +95,8 @@
                                 @foreach($tables as $k=>$table)
                                     <tr>
                                         <td>
-                                            <img src="{{ asset('public/storage/'.$table->qr_code) }}" style="width: 80px" alt="" srcset="">
+                                            {{-- public/ --}}
+                                            <img src="{{ Storage::url('public/storage/'.$table->qr_code) }}" style="width: 80px" alt="" srcset="">
                                         </td>
                                         <th scope="row">{{$tables->firstitem()+$k}}</th>
                                         <td>{{$table['number']}}</td>
