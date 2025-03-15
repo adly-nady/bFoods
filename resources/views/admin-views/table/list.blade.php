@@ -96,7 +96,7 @@
                                     <tr>
                                         <td>
                                             {{-- public/ --}}
-                                            <img src="{{ Storage::url('public/storage/'.$table->qr_code) }}" style="width: 80px" alt="" srcset="">
+                                            <img src="{{ asset('public/storage/'.$table->qr_code) }}" style="width: 80px" alt="" srcset="">
                                         </td>
                                         <th scope="row">{{$tables->firstitem()+$k}}</th>
                                         <td>{{$table['number']}}</td>
